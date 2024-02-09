@@ -3,8 +3,19 @@
    License: none (public domain)
 */
 
+
+@import 'assets/stylesheets/mixins';
+@import 'assets/stylesheets/typography';
+
 $icon-color: #2C64FF;
-$bg-color: #E8EBF3;
+
+
+$primary: #EBBD07;
+$secondary: #968336;
+$tertiary: #6B6139;
+$fourthiary: #413D2D;
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -64,17 +75,14 @@ code {
 }
 
 .App {
-  background: $bg-color;
   display: flex;
-
+  overflow: hidden;
   height: 100%;
   min-height: 100vh;
   width: 100vw;
   nav {
-    background: #333;
-    max-height:50px;
+    background: $fourthiary;
     overflow: hidden;
-
     padding: 1rem;
     text-align: center;
     color: #fff;
@@ -82,17 +90,31 @@ code {
     position: fixed;
     bottom: 0;
     width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
 
     .nav-links {
       display: inline-flex;
       flex-direction: row;
       width: 100%;
       margin-bottom: 0;
+      small {
+        display: none;
+        @media (min-width:768px) {
+          display: block;
+        }
+        font-size: 12px;
+        margin-top: 5px;
+      }
+      .active {
+        color: $primary;
+      }
     }
     li {
       flex: 1;
       i {
-        font-size: 21px;
+        @include font-size(12px, 21px, 320px, 1200px);
       }
     }
     a {
@@ -111,6 +133,8 @@ code {
     grid-column-gap: 25px;
     grid-row-gap: 25px;
     padding: 25px;
+    margin-left: -25px;
+    margin-right: -25px;
     @media (min-width:992px) {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -122,10 +146,20 @@ code {
 
     .musicItem {
       flex: 1;
-      text-align: center;
+      text-transform: capitalize;
       img {
        object-fit: contain;
         width: 100%;
+      }
+      .gridTitle {
+        @include font-size(12px, 21px, 320px, 1200px);
+        color: $primary;
+        font-family: 'Protest Strike', sans-serif;
+      }
+      .gridLink {
+        color: $secondary;
+        font-family: 'Protest Strike', sans-serif;
+        text-decoration: underline;
       }
     }
   }
@@ -133,9 +167,13 @@ code {
     flex-direction: column;
   //}
   .globalHeader {
+    &[data-path="/"] {
+      position: fixed;
+      a { color: #fff; }
+    }
     width:100%;
-    text-align: center;
-    height: 50px;
+    padding: 1rem;
+    a { color: #999; }
 
   }
 }
@@ -149,7 +187,6 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $bg-color;
 
 
   .wrapper {
@@ -198,3 +235,57 @@ code {
 
 
 }
+
+// global styles
+a { text-decoration: none; }
+
+.standardTemplate {
+  padding: 1em 3em;
+  margin-bottom: 8em;
+}
+
+
+
+
+.homeView {
+  background-image: url("assets/images/me_bg2.jpg"), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+  background-blend-mode: hue;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 1em;
+  background-position: -8em -5vw;
+  @media (min-width:768px) {
+    background-position: 0px -11vw;
+
+  }
+}
+
+
+
+.messageBox {
+  background: rgba(0,0,0,0.35);
+  padding: 1rem;
+  align-self: center;
+  display: inline-block;
+  flex-direction: column;
+  vertical-align: middle;
+  position: absolute;
+  top: 33%;
+  max-width: 63vw;
+}
+
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  font-family: 'Protest Strike', sans-serif;
+  color: $primary;
+}
+.secondary-title {color: #fff; }
+.secondaryColor {color: $secondary; }
+.headlineAltColor { color: $tertiary; }
+
+p, body, a, html {
+  font-family: 'Open Sans', sans-serif;
+}
+.blackColor { color: #333; }
+

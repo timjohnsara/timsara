@@ -1,0 +1,10 @@
+
+
+h1, .h1 {   @include font-size(24px, 76px, 320px, 1200px);}
+h2, .h2 {   @include font-size(21px, 56px, 320px, 1200px);}
+
+p {
+  @include font-size(16px, 18px, 320px, 1200px);
+  font-weight: 300;
+  line-height: 24px;
+}

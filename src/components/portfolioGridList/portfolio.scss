@@ -1,0 +1,23 @@
+@import '../../assets/stylesheets/mixins';
+@import '../../assets/stylesheets/typography';
+
+
+$primary: #EBBD07;
+$secondary: #968336;
+$tertiary: #6B6139;
+$fourthiary: #413D2D;
+
+
+
+.bulletedList {
+  list-style:inside;
+  li {
+    @include font-size(14px, 16px, 320px, 1200px);
+    font-weight: 100;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.portfolioItem {
+  margin-bottom: 1em;
+}

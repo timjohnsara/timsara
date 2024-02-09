@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {client} from '../../client';
 
-export default function GridList({type}) {
+export default function GridList() {
     const [isGridLoading, setIsGridLoading] = useState(false);
     const [GridItems, setGridItems] = useState([]);
 
@@ -21,7 +21,7 @@ export default function GridList({type}) {
     const getGridListItems = useCallback(async() => {
         setIsGridLoading(true)
         try {
-            const response = await client.getEntries({ content_type: type})
+            const response = await client.getEntries({ content_type: 'music'})
             const responseData = response.items
             if (responseData) {
                 cleanUpGridItems(responseData)
@@ -39,17 +39,19 @@ export default function GridList({type}) {
     }, [getGridListItems])
 
     if (isGridLoading) {
-        return <div className='animatedLoading'><ul class='dots'><li></li><li></li><li></li></ul></div>;
+        return <div className='animatedLoading'><ul className='dots'><li></li><li></li><li></li></ul></div>;
     }
 
     return (
         <div className="innerApp">
             {GridItems.map((item, i) => {
+                let linkDesc = 'Find on Spotify';
                 return (
                     <div className="musicItem" key={item.id}>
-                        <h1>{item.gridTitle}</h1>
                         <img src={item.gridImage} alt={item.gridTitle} />
-                        <a href={item.gridLink} target="_blank" rel="noreferrer">Find on Spotify</a>
+                        <div className="gridTitle">{item.gridTitle}</div>
+
+                        <a href={item.gridLink} className="gridLink" target="_blank" rel="noreferrer">{linkDesc}</a>
                     </div>
                 )
             })}
